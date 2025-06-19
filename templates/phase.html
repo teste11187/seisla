@@ -1,0 +1,283 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Fase {{ phase }} - {{ topic }} | CodeSeasons</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/phase.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/themes/prism-tomorrow.min.css">
+</head>
+<body class="season-{{ season }}">
+    <div class="phase-background"></div>
+    
+    <header class="phase-header">
+        <nav class="phase-navbar">
+            <a href="/season/{{ season }}" class="back-button">
+                <span class="back-icon">←</span>
+                <span>Voltar à Estação</span>
+            </a>
+            <div class="phase-info">
+                <span class="phase-badge">Fase {{ phase }}</span>
+                <span class="phase-title">{{ topic }}</span>
+            </div>
+            <div class="phase-progress">
+                <div class="progress-circle">
+                    <svg class="progress-ring" width="40" height="40">
+                        <circle class="progress-ring-circle" stroke="white" stroke-width="3" fill="transparent" r="16" cx="20" cy="20"/>
+                    </svg>
+                    <span class="progress-percentage">0%</span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <main class="phase-main">
+        <div class="phase-container">
+            <!-- Seção de Conteúdo Teórico -->
+            <section class="content-section active" id="content-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="title-icon">📚</span>
+                        Teoria
+                    </h1>
+                    <p class="section-subtitle">Entenda os conceitos fundamentais</p>
+                </div>
+                
+                <div class="content-card">
+                    <div class="content-body">
+                        {{ content|safe }}
+                    </div>
+                    
+                    <div class="content-actions">
+                        <button class="action-button primary" onclick="nextSection('example')">
+                            <span>Ver Exemplo</span>
+                            <span class="button-icon">👀</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Exemplo com Explicação -->
+            <section class="example-section" id="example-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="title-icon">👀</span>
+                        Exemplo Prático
+                    </h1>
+                    <p class="section-subtitle">Veja o código funcionando</p>
+                </div>
+                
+                <div class="example-card">
+                    <div class="code-editor">
+                        <div class="editor-header">
+                            <div class="editor-tabs">
+                                <div class="tab active">
+                                    <span class="tab-icon">📄</span>
+                                    <span>exemplo.html</span>
+                                </div>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="editor-button" onclick="copyCode()">
+                                    <span class="button-icon">📋</span>
+                                    Copiar
+                                </button>
+                                <button class="editor-button" onclick="runCode()">
+                                    <span class="button-icon">▶️</span>
+                                    Executar
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editor-body">
+                            <pre><code class="language-html" id="code-example">{{ code_example }}</code></pre>
+                        </div>
+                    </div>
+                    
+                    <div class="code-output">
+                        <div class="output-header">
+                            <span class="output-title">Resultado</span>
+                            <button class="output-button" onclick="toggleFullscreen()">
+                                <span class="button-icon">🔍</span>
+                            </button>
+                        </div>
+                        <div class="output-body">
+                            <iframe id="code-preview" src="about:blank"></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="example-actions">
+                        <button class="action-button secondary" onclick="previousSection('content')">
+                            <span class="button-icon">←</span>
+                            <span>Voltar</span>
+                        </button>
+                        <button class="action-button primary" onclick="nextSection('explanation')">
+                            <span>Explicação Detalhada</span>
+                            <span class="button-icon">🔍</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Explicação Linha por Linha -->
+            <section class="explanation-section" id="explanation-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="title-icon">🔍</span>
+                        Explicação Detalhada
+                    </h1>
+                    <p class="section-subtitle">Entenda cada linha do código</p>
+                </div>
+                
+                <div class="explanation-card">
+                    <div class="explanation-body">
+                        {{ code_explanation|safe }}
+                    </div>
+                    
+                    <div class="explanation-actions">
+                        <button class="action-button secondary" onclick="previousSection('example')">
+                            <span class="button-icon">←</span>
+                            <span>Voltar</span>
+                        </button>
+                        <button class="action-button primary" onclick="nextSection('exercise')">
+                            <span>Praticar Agora</span>
+                            <span class="button-icon">🎯</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Seção de Exercício -->
+            <section class="exercise-section" id="exercise-section">
+                <div class="section-header">
+                    <h1 class="section-title">
+                        <span class="title-icon">🎯</span>
+                        Seu Desafio
+                    </h1>
+                    <p class="section-subtitle">Coloque em prática o que aprendeu</p>
+                </div>
+                
+                <div class="exercise-card">
+                    <div class="exercise-description">
+                        {{ exercise|safe }}
+                    </div>
+                    
+                    <div class="exercise-editor">
+                        <div class="editor-header">
+                            <div class="editor-tabs">
+                                <div class="tab active">
+                                    <span class="tab-icon">✏️</span>
+                                    <span>seu-codigo.html</span>
+                                </div>
+                            </div>
+                            <div class="editor-actions">
+                                <button class="editor-button" onclick="runUserCode()">
+                                    <span class="button-icon">▶️</span>
+                                    Testar
+                                </button>
+                                <button class="editor-button" onclick="checkExercise()">
+                                    <span class="button-icon">✅</span>
+                                    Verificar
+                                </button>
+                                <button class="editor-button" onclick="showHint()">
+                                    <span class="button-icon">💡</span>
+                                    Dica
+                                </button>
+                            </div>
+                        </div>
+                        <div class="editor-body">
+                            <textarea id="user-code" placeholder="Digite seu código HTML aqui...
+
+Dica: Comece com <!DOCTYPE html> e siga a estrutura básica que você aprendeu!"></textarea>
+                        </div>
+                    </div>
+                    
+                    <div class="user-code-output">
+                        <div class="output-header">
+                            <span class="output-title">Seu Resultado</span>
+                            <button class="output-button" onclick="toggleUserFullscreen()">
+                                <span class="button-icon">🔍</span>
+                            </button>
+                        </div>
+                        <div class="output-body">
+                            <iframe id="user-code-preview" src="about:blank"></iframe>
+                        </div>
+                    </div>
+                    
+                    <div class="exercise-feedback" id="exercise-feedback">
+                        <!-- Feedback será inserido aqui -->
+                    </div>
+                    
+                    <div class="exercise-actions">
+                        <button class="action-button secondary" onclick="previousSection('explanation')">
+                            <span class="button-icon">←</span>
+                            <span>Voltar</span>
+                        </button>
+                        <button class="action-button primary disabled" id="complete-button" onclick="completePhase()">
+                            <span>Concluir Fase</span>
+                            <span class="button-icon">🏆</span>
+                        </button>
+                    </div>
+                </div>
+            </section>
+        </div>
+    </main>
+
+    <!-- Tutor IA Melhorado -->
+    <div id="ai-tutor" class="ai-tutor">
+        <div class="tutor-header" onclick="toggleTutor()">
+            <span class="tutor-icon">🤖</span>
+            <span class="tutor-name">CodeBot</span>
+            <span class="tutor-status online">Online</span>
+        </div>
+        <div class="tutor-body">
+            <div class="tutor-messages" id="tutorMessages">
+                <div class="message bot-message">
+                    <span class="message-icon">🤖</span>
+                    <span class="message-text">
+                        Olá! 👋 Sou o CodeBot, seu tutor pessoal! Estou aqui para te ajudar com qualquer dúvida sobre 
+                        {% if season == 'verao' %}HTML{% elif season == 'primavera' %}CSS{% elif season == 'outono' %}JavaScript{% else %}Python{% endif %}.
+                        
+                        Pode me perguntar coisas como:
+                        • "O que é uma tag?"
+                        • "Para que serve o head?"
+                        • "Como fazer um título?"
+                        
+                        Vamos aprender juntos! 🚀
+                    </span>
+                </div>
+            </div>
+            <div class="tutor-input">
+                <input type="text" id="tutorInput" placeholder="Digite sua pergunta... (ex: o que é div?)">
+                <button onclick="sendToTutor()">
+                    <span class="button-icon">📤</span>
+                </button>
+            </div>
+            <div class="tutor-suggestions">
+                <div class="suggestion-title">💡 Perguntas sugeridas:</div>
+                <button class="suggestion-btn" onclick="askSuggestion('o que é html')">O que é HTML?</button>
+                <button class="suggestion-btn" onclick="askSuggestion('o que é div')">O que é div?</button>
+                <button class="suggestion-btn" onclick="askSuggestion('para que serve head')">Para que serve head?</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/components/prism-core.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/prism/1.24.1/plugins/autoloader/prism-autoloader.min.js"></script>
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/phase.js') }}"></script>
+    
+    <script>
+        // Dados da fase atual
+        const phaseData = {
+            season: '{{ season }}',
+            phase: {{ phase }},
+            topic: '{{ topic }}',
+            codeExample: `{{ code_example|safe }}`,
+            exercise: '{{ exercise }}',
+            answer: `{{ answer|safe }}`,
+            difficulty: {{ difficulty }}
+        };
+    </script>
+</body>
+</html>

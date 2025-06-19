@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{% if season == 'verao' %}Estação Verão - HTML{% elif season == 'primavera' %}Estação Primavera - CSS{% elif season == 'outono' %}Estação Outono - JavaScript{% else %}Estação Inverno - Python{% endif %} | CodeSeasons</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/season.css') }}">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+</head>
+<body class="season-{{ season }}">
+    <div class="season-background-animation"></div>
+    
+    <header class="season-header">
+        <nav class="season-navbar">
+            <a href="/" class="back-button">
+                <span class="back-icon">←</span>
+                <span>Voltar</span>
+            </a>
+            <div class="season-info">
+                <span class="season-icon">
+                    {% if season == 'verao' %}☀️
+                    {% elif season == 'primavera' %}🌸
+                    {% elif season == 'outono' %}🍂
+                    {% else %}❄️
+                    {% endif %}
+                </span>
+                <span class="season-name">
+                    {% if season == 'verao' %}Verão - HTML
+                    {% elif season == 'primavera' %}Primavera - CSS
+                    {% elif season == 'outono' %}Outono - JavaScript
+                    {% else %}Inverno - Python
+                    {% endif %}
+                </span>
+            </div>
+            <div class="progress-indicator">
+                <span class="progress-text">0/4 Fases</span>
+            </div>
+        </nav>
+    </header>
+
+    <main class="season-main">
+        <section class="season-intro">
+            <div class="intro-content">
+                <h1 class="season-title">
+                    {% if season == 'verao' %}
+                        <span class="title-emoji">☀️</span>
+                        Bem-vindo ao Verão do HTML!
+                    {% elif season == 'primavera' %}
+                        <span class="title-emoji">🌸</span>
+                        Bem-vindo à Primavera do CSS!
+                    {% elif season == 'outono' %}
+                        <span class="title-emoji">🍂</span>
+                        Bem-vindo ao Outono do JavaScript!
+                    {% else %}
+                        <span class="title-emoji">❄️</span>
+                        Bem-vindo ao Inverno do Python!
+                    {% endif %}
+                </h1>
+                
+                <p class="season-description">
+                    {% if season == 'verao' %}
+                        Sinta o calor do conhecimento enquanto aprende a estruturar páginas web com HTML! 
+                        Como o sol que ilumina tudo ao seu redor, o HTML é a base que dá vida a toda página web.
+                    {% elif season == 'primavera' %}
+                        Floresça suas habilidades com CSS! Como as flores que desabrocham na primavera, 
+                        você aprenderá a dar cor, estilo e beleza às suas páginas web.
+                    {% elif season == 'outono' %}
+                        Deixe suas páginas dançarem como folhas ao vento com JavaScript! 
+                        Adicione movimento, interatividade e vida aos seus projetos web.
+                    {% else %}
+                        Cristalize seu conhecimento em programação com Python! 
+                        Como flocos de neve únicos, cada linha de código tem sua beleza e propósito.
+                    {% endif %}
+                </p>
+            </div>
+            
+            <div class="intro-visual">
+                {% if season == 'verao' %}
+                    <div class="summer-scene">
+                        <div class="big-sun"></div>
+                        <div class="sun-rays-big"></div>
+                        <div class="beach-waves"></div>
+                        <div class="palm-tree">🌴</div>
+                    </div>
+                {% elif season == 'primavera' %}
+                    <div class="spring-scene">
+                        <div class="flower-field">
+                            <div class="big-flower">🌻</div>
+                            <div class="small-flowers">🌸🌺🌼</div>
+                        </div>
+                        <div class="rainbow"></div>
+                    </div>
+                {% elif season == 'outono' %}
+                    <div class="autumn-scene">
+                        <div class="tree-with-leaves">🌳</div>
+                        <div class="falling-leaves-big">🍂🍁🍃</div>
+                        <div class="wind-swirl"></div>
+                    </div>
+                {% else %}
+                    <div class="winter-scene">
+                        <div class="snowman">⛄</div>
+                        <div class="snow-storm"></div>
+                        <div class="ice-crystals-big">❄️</div>
+                    </div>
+                {% endif %}
+            </div>
+        </section>
+
+        <section class="phases-section">
+            <h2 class="phases-title">Fases de Aprendizado</h2>
+            <div class="phases-path">
+                <div class="phase-card" data-phase="1" onclick="navigateToPhase('{{ season }}', 1)">
+                    <div class="phase-number">1</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">
+                            {% if season == 'verao' %}Estrutura Básica
+                            {% elif season == 'primavera' %}Seletores e Propriedades
+                            {% elif season == 'outono' %}Variáveis e Tipos
+                            {% else %}Sintaxe Básica
+                            {% endif %}
+                        </h3>
+                        <p class="phase-description">
+                            {% if season == 'verao' %}Aprenda a estrutura fundamental de um documento HTML
+                            {% elif season == 'primavera' %}Domine os seletores CSS e suas propriedades básicas
+                            {% elif season == 'outono' %}Entenda variáveis, tipos de dados e operadores
+                            {% else %}Conheça a sintaxe limpa e elegante do Python
+                            {% endif %}
+                        </p>
+                        <div class="phase-status unlocked">
+                            <span class="status-icon">🔓</span>
+                            <span class="status-text">Disponível</span>
+                        </div>
+                    </div>
+                    <div class="phase-connector"></div>
+                </div>
+
+                <div class="phase-card" data-phase="2" onclick="navigateToPhase('{{ season }}', 2)">
+                    <div class="phase-number">2</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">
+                            {% if season == 'verao' %}Tags e Elementos
+                            {% elif season == 'primavera' %}Layout e Posicionamento
+                            {% elif season == 'outono' %}Funções e Escopo
+                            {% else %}Estruturas de Controle
+                            {% endif %}
+                        </h3>
+                        <p class="phase-description">
+                            {% if season == 'verao' %}Explore as principais tags HTML e seus usos
+                            {% elif season == 'primavera' %}Aprenda a posicionar elementos na página
+                            {% elif season == 'outono' %}Crie funções reutilizáveis e entenda escopo
+                            {% else %}Domine if, for, while e outras estruturas
+                            {% endif %}
+                        </p>
+                        <div class="phase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">Bloqueada</span>
+                        </div>
+                    </div>
+                    <div class="phase-connector"></div>
+                </div>
+
+                <div class="phase-card" data-phase="3" onclick="navigateToPhase('{{ season }}', 3)">
+                    <div class="phase-number">3</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">
+                            {% if season == 'verao' %}Formulários e Interação
+                            {% elif season == 'primavera' %}Responsividade
+                            {% elif season == 'outono' %}DOM e Eventos
+                            {% else %}Estruturas de Dados
+                            {% endif %}
+                        </h3>
+                        <p class="phase-description">
+                            {% if season == 'verao' %}Crie formulários interativos para capturar dados
+                            {% elif season == 'primavera' %}Torne suas páginas adaptáveis a qualquer tela
+                            {% elif season == 'outono' %}Manipule elementos da página e responda a eventos
+                            {% else %}Trabalhe com listas, dicionários e conjuntos
+                            {% endif %}
+                        </p>
+                        <div class="phase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">Bloqueada</span>
+                        </div>
+                    </div>
+                    <div class="phase-connector"></div>
+                </div>
+
+                <div class="phase-card" data-phase="4" onclick="navigateToPhase('{{ season }}', 4)">
+                    <div class="phase-number">4</div>
+                    <div class="phase-content">
+                        <h3 class="phase-title">
+                            {% if season == 'verao' %}Semântica e Acessibilidade
+                            {% elif season == 'primavera' %}Animações e Transições
+                            {% elif season == 'outono' %}Projeto Final
+                            {% else %}Módulos e Bibliotecas
+                            {% endif %}
+                        </h3>
+                        <p class="phase-description">
+                            {% if season == 'verao' %}Torne suas páginas acessíveis e semanticamente corretas
+                            {% elif season == 'primavera' %}Adicione movimento e vida às suas criações
+                            {% elif season == 'outono' %}Construa uma aplicação web completa
+                            {% else %}Explore o ecossistema Python e suas bibliotecas
+                            {% endif %}
+                        </p>
+                        <div class="phase-status locked">
+                            <span class="status-icon">🔒</span>
+                            <span class="status-text">Bloqueada</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <section class="learning-stats">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <div class="stat-icon">📚</div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Lições Concluídas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⭐</div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Pontos Ganhos</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">🏆</div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Conquistas</div>
+                </div>
+                <div class="stat-card">
+                    <div class="stat-icon">⚡</div>
+                    <div class="stat-number">0</div>
+                    <div class="stat-label">Sequência</div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- Tutor IA -->
+    <div id="ai-tutor" class="ai-tutor">
+        <div class="tutor-header" onclick="toggleTutor()">
+            <span class="tutor-icon">🤖</span>
+            <span class="tutor-name">CodeBot</span>
+            <span class="tutor-status">Online</span>
+        </div>
+        <div class="tutor-body">
+            <div class="tutor-messages" id="tutorMessages">
+                <div class="message bot-message">
+                    <span class="message-icon">🤖</span>
+                    <span class="message-text">
+                        {% if season == 'verao' %}
+                            Olá! Estou aqui para ajudar você a dominar o HTML! Que tal começarmos pela Fase 1?
+                        {% elif season == 'primavera' %}
+                            Oi! Pronto para dar estilo às suas páginas com CSS? Vamos florescer juntos!
+                        {% elif season == 'outono' %}
+                            E aí! Vamos adicionar interatividade com JavaScript? Será uma aventura incrível!
+                        {% else %}
+                            Olá! Preparado para a elegância do Python? Vamos cristalizar seu conhecimento!
+                        {% endif %}
+                    </span>
+                </div>
+            </div>
+            <div class="tutor-input">
+                <input type="text" id="tutorInput" placeholder="Digite sua pergunta...">
+                <button onclick="sendToTutor()">Enviar</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+    <script src="{{ url_for('static', filename='js/season.js') }}"></script>
+</body>
+</html>
